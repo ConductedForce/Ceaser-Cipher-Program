@@ -1,0 +1,162 @@
+<!--
+    Ceaser Cipher
+    Created by: Jeremy Locatelli and Brandon Engholm
+-->
+<script>
+
+    // function mod(x, y){
+    //     return (x % y + y) % y;
+    // }
+
+    
+    // function decrypt(str, key) {
+    // 	var result = "";
+    // 	for (var i = 0; i < str.length; i++) {
+    // 		var c = str.charCodeAt(i);
+    		
+    // 		if (65 <= c && c <=  90){
+    // 		    result += String.fromCharCode(mod(c - 65 + key - 11, 26) + 65);  // Uppercase
+    // 		} else if (97 <= c && c <= 122) {
+    // 		    result += String.fromCharCode(mod(c - 97 + key - 11 , 26) + 97);  // Lowercase
+    // 		} else {
+    // 		    result += str.charAt(i); 
+    // 		}
+    // 	}
+    // 	return result;
+    // }
+    
+    function executeCipher(){
+        var str = document.getElementById("strBox").value;
+        var key = document.getElementById("keyBox").value;
+        
+        var enc = document.getElementById("enc").checked;
+        var dec = document.getElementById("dec").checked;
+        
+        var message = "";
+        if (enc == true){
+            message = encrypt(str, key);
+            $("#displayBox").html(message);
+        } else if (dec == true){
+            message = decrypt(str, key);
+            $("#displayBox").html(message);
+        } else {
+            alert("Please Choose Decrypt or Encrypt");
+        }
+    }
+    
+    
+    function encrypt(text,number){
+            var cipherText = "";
+            var heck = text.toLowerCase();
+            for(var i=0; i< heck.length; i++){
+                var initChar, encryptChar;
+                initChar = heck.charAt(i);
+                //dont encode non letters
+                if(initChar < 'a' || initChar > 'z'){
+                   cipherText += initChar;
+                } else {
+                    encryptChar = cipher(initChar,number);
+                    cipherText += encryptChar;
+                }
+
+
+        }
+        return cipherText;
+    }
+    
+    function decrypt(text,number){
+            var cipherText = "";
+            var heck = text.toLowerCase();
+            for(var i=0; i< heck.length; i++){
+                var initChar, encryptChar;
+                initChar = heck.charAt(i);
+                //dont encode non letters
+                if(initChar < 'a' || initChar > 'z'){
+                   cipherText += initChar;
+                } else {
+                    encryptChar = antiCipher(initChar,number);
+                    cipherText += encryptChar;
+                }
+
+
+        }
+        return cipherText;
+    }
+    
+    function cipher(ch, value){
+        var code;
+        var encryptChar;
+        var debug =ch.charCodeAt(0);
+        var really = 'a';
+        really = really.charCodeAt(0);
+        code = ch.charCodeAt(0) - really;//convert to number between 0 and 25
+        code = (code + value) % 26;
+        //wrap to beginning of alphabet
+
+        //makes a number with the offset included
+        var cryptNum = code + really;
+        //casts that number to a char
+        
+        encryptChar = String.fromCharCode(cryptNum);
+        return encryptChar;
+    }
+    
+    function antiCipher(ch, value){
+        var code;
+        var encryptChar;
+        var debug =ch.charCodeAt(0);
+        var really = 'a';
+        really = really.charCodeAt(0);
+        code = ch.charCodeAt(0) - really;//convert to number between 0 and 25
+        code = (code - value) % 26;
+        //wrap to beginning of alphabet
+
+        //makes a number with the offset included
+        var cryptNum = code + really;
+        //casts that number to a char
+        
+        encryptChar = String.fromCharCode(cryptNum);
+        return encryptChar;
+    }
+    
+</script>
+
+<html>
+    <head>
+        <title>Ceaser Cipher</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    </head>
+    
+    <body>
+        <style>
+            @import url('css/styles.css');
+        </style>
+        <div class="jumbotron">
+          <h1 class="display-3">Ceaser Cipher</h1>
+          <hr class="my-4">
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="about.php" role="button">Learn more</a>
+          </p>
+        </div>
+        <form>
+            Text:
+            <input type="text" name="input" id="strBox" /><br>
+            Offset for Cipher:
+            <input type="number" name="offset" id="keyBox"/><br>
+            Encrypt Text:
+            <input type="radio" name="choice" value="encrypt" id="enc" />
+            Decrypt Text:
+            <input type="radio" name="choice" value="decrypt" id="dec" />
+            <input type="button" onClick="executeCipher();" value="Execute" />
+        </form>
+        <div id="displayArea">
+            <span id="displayBox"></span>
+        </div>
+        
+    </body>
+</html>
+
