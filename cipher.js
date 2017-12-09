@@ -1,6 +1,6 @@
     function executeCipher(){
         var str = document.getElementById("strBox").value;
-        var key = document.getElementById("keyBox").value;
+        var key = parseInt(document.getElementById("keyBox").value);
         
         var enc = document.getElementById("enc").checked;
         var dec = document.getElementById("dec").checked;
