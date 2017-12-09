@@ -2,7 +2,7 @@
         return x % y;
     }
     
-    function encrypt(str, key) {
+    function caeser(str, key) {
     	var result = "";
     	for (var i = 0; i < str.length; i++) {
     		var c = str.charCodeAt(i);
@@ -17,22 +17,6 @@
     	}
     	return result;
     }
-     
-   function decrypt(str, key) {
-    	var result = "";
-    	for (var i = 0; i < str.length; i++) {
-    		var c = str.charCodeAt(i);
-    		
-    		if (65 <= c && c <= 90) {
-    		    result += String.fromCharCode(mod(c - 65 - key, 26) + 65);  // Uppercase
-    		} else if (97 <= c && c <= 122) {
-    		    result += String.fromCharCode(mod(c - 97 - key, 26) + 97);  // Lowercase
-    		} else {
-    		    result += str.charAt(i);  // Copy
-    		}    
-    	}
-    	return result;
-    }
     
     function executeCipher(){
         var str = document.getElementById("strBox").value;
@@ -43,10 +27,11 @@
         
         var message = "";
         if (enc == true){
-            message = encrypt(str, key);
+            message = caeser(str, key);
             $("#displayBox").html(message);
         } else if (dec == true){
-            message = decrypt(str, key);
+            key = (26 - key) % 26;
+            message = caeser(str, key);
             $("#displayBox").html(message);
         } else {
             alert("Please Choose Decrypt or Encrypt");
