@@ -26,13 +26,13 @@
         <form>
             Text:
             <input type="text" name="input" id="strBox" /><br>
-            Offset for Cipher:
+            Shift Key:
             <input type="number" name="offset" id="keyBox"/><br>
             Encrypt Text:
             <input type="radio" name="choice" value="encrypt" id="enc" />
             Decrypt Text:
             <input type="radio" name="choice" value="decrypt" id="dec" />
-            <input type="button" onClick="executeCipher();" value="Execute" />
+            <br><input type="button" onClick="executeCipher();" value="Execute" />
         </form>
         <div id="displayArea">
             <span id="displayBox"></span>
