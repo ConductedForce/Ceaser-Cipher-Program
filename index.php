@@ -19,11 +19,9 @@
             @import url('css/styles.css');
         </style>
         <div class="jumbotron">
-          <h1 class="display-3">Ceaser Cipher</h1>
-          <hr class="my-4">
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="about.php" role="button">Learn more</a>
-          </p>
+            <h1 class="display-3">Ceaser Cipher</h1>
+            <hr class="my-4">
+            <p class="lead">Caeser Cipher by: Haley Simmons, Jeremy Locatelli, and Brandon Engholm</p>
         </div>
         <form>
             Text:
